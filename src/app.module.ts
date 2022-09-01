@@ -1,9 +1,19 @@
 import { Module } from '@nestjs/common';
+import { I18nModule } from 'nestjs-i18n';
+import path, { dirname } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 @Module({
-  imports: [],
+  imports: [
+    I18nModule.forRoot({
+      fallbackLanguage: 'en',
+      loaderOptions: {
+        path: path.join(__dirname, '/i18n/'),
+        watch: true,
+      }
+    })
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
